@@ -173,7 +173,11 @@ def convert(link, context, trailing_newline):
 @visitor.when(ArticleLink)
 def convert(link, context, trailing_newline):
     text = convert_children(link, context).strip(" ")
-    pagename = convert_internal_link(link.target)
+    try:
+        pagename = unicode(convert_internal_link(link.target), 'utf-8')
+    except:
+        pagename = convert_internal_link(link.target)
+
     if len(text):
         return "[[%s|%s]]" % (pagename, text)
     else:

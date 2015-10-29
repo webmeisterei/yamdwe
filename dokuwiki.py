@@ -79,7 +79,7 @@ class Exporter(object):
         print("Converting %d revisions of page '%s'..." %
               (len(page["revisions"]), page['title']))
         # Sanitise the mediawiki pagename to something matching the dokuwiki pagename convention
-        full_title = make_dokuwiki_pagename(page['title'])
+        full_title = unicode(make_dokuwiki_pagename(page['title']), 'utf-8')
 
         # Mediawiki pagenames can contain namespace :s, convert these to dokuwiki / paths on the filesystem (becoming : namespaces in dokuwiki)
         subdir, pagename = os.path.split(full_title.replace(':','/'))
